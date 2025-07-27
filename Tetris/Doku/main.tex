@@ -1,0 +1,231 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+
+\geometry{left=3cm,right=3cm,top=2.5cm,bottom=2.5cm}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Tetris-Projekt}
+\lhead{Informatik 3}
+\rfoot{Seite \thepage}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \includegraphics[width=0.4\linewidth]{Tetris-Menu.png}
+    \vspace{1cm}
+
+    {\LARGE\bfseries Tetris mit PyGame – Projektdokumentation \par}
+    \vspace{1.5cm}
+
+    {\large Orkun Öztürk \par}
+    \vspace{0.5cm}
+
+    {\small HTW Berlin – Informatik 3, Sommersemester 2025 \par}
+    \vspace{1.5cm}
+
+    {\large \today \par}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Einführung}
+\subsection{Motivation}
+Das Projekt zum Entwickeln eines Tetris-Games entstand aus dem Wunsch, vielleicht eines Tages in der Gaming-Branche zu arbeiten. Durch eine Exkursion mit dem Englischkurs von Thomas O'Mera, bei der ein Game-Development-Office besucht wurde, wurde uns Studierenden oft ans Herz gelegt, klein anzufangen und zu schauen, was man aus kleinen Projekten machen kann.
+
+\subsection{Was wurde entwickelt?}
+Ein eigenes Tetris-Projekt mit PyGame. Es gibt ein Menü mit Schwierigkeitsauswahl, ein Punkte-Tracking und natürlich das eigentliche Spiel mit allem, was dazugehört: Steine bewegen, rotieren, stapeln – und wenn’s zu voll wird, kommt ein Game Over.
+\subsection{Warum Tetris?}
+Tetris erschien wie ein guter Einstieg. Es ist bekannt, bringt genug Logik mit, um was draus zu lernen, aber ist gleichzeitig nicht komplett überfordernd. Außerdem macht es Spaß, und das war auch ein Ziel: etwas bauen, was man am Ende wirklich benutzen und spielen kann.
+
+\newpage
+
+\section{Anforderungen}
+\subsection{Personas}
+\subsection*{Persona 1: Lara, 17, Schülerin}
+
+Lara geht in die 11. Klasse auf einem Gymnasium in Hannover. Sie liebt Retro-Ästhetik, spielt gerne zwischendurch mal ein paar Runden Casual Games und entdeckt gerade Programmieren mit Python. Sie findet es cool, wenn Spiele simpel und direkt losgehen – ohne Account-Zwang oder komplizierte Steuerung. Tetris kennt sie aus Memes und von Ihrem großen Bruder.\\
+\textbf{Ziel beim Spiel:} Einfach mal abschalten nach der Schule – und dabei das Gefühl haben, dass sie mit jedem Versuch besser wird.\\
+\textbf{Technischer Hintergrund:} Erste Python-Erfahrung im Schulunterricht, interessiert sich für Game Dev.
+\subsection*{Persona 2: Murat, 42, Montagenarbeiter}
+
+Mit seiner Frau und zwei Kindern lebt er ein bescheidenes Leben in Köln. Er arbeitet im Schichtdienst, mag aber Technik und hatte früher mal Spaß an Tetris auf seinem altem Nokia. Abends sitzt er manchmal am Familien-PC oder Tablet, schaut YouTube oder klickt sich durch einfache Spiele. Er spricht gut Deutsch, aber lieber einfach gehalten – keine langen Erklärungen.\\
+\textbf{Ziel beim Spiel:} Ein bisschen Nostalgie genießen, Stress abbauen, vielleicht zeigen, dass man noch gut und schnell im Kopf ist und seinen alten Highscore besiegen kann.\\
+\textbf{Technischer Hintergrund:} Keine Programmiererfahrung, nutzt aber regelmäßig Handy, PC und einfache Spiele.
+
+\subsection*{Persona 3: Sanjivan, 24, Medieninformatik-Student}
+
+Er studiert Medieninformatik im 5. Semester und ist eigentlich ständig von Projekten umgeben. Gerade sucht er nach Inspiration für seine eigene Spiele-Idee und spielt gerne kleinere, selbstentwickelte Games von Kommiliton:innen durch. Er achtet auf Usability, Look \& Feel und liebt es, durch Code zu scrollen und Fehler zu finden, die man zusammen ausbessern kann.\\
+\textbf{Ziel beim Spiel:} Spaß haben, aber gleichzeitig analysieren, wie die Logik aufgebaut ist – und wie man es vielleicht noch optimieren könnte.\\
+\textbf{Technischer Hintergrund:} Gute Python-Kenntnisse, arbeitet mit PyGame, Unity und hat schon kleinere Games selbst entwickelt.\\
+\newpage
+
+\subsection{User Stories}
+\subsubsection*{User Story für Lara}
+
+\textbf{Als} Schülerin mit Interesse an Retro-Games \\
+\textbf{kann ich} Tetris direkt ohne Anmeldung und komplizierte Menüs spielen, \\
+\textbf{sodass} ich schnell loslegen und mich nach der Schule entspannen kann.
+
+\subsubsection*{User Story für Murat}
+
+\textbf{Als} berufstätiger Familienvater mit wenig Zeit und Technik-Erfahrung \\
+\textbf{kann ich} Tetris einfach am PC starten, ohne viel Erklärung oder Setup, \\
+\textbf{sodass} ich abends entspannen, in Erinnerungen schwelgen und versuchen kann, meinen alten Highscore zu knacken.
+
+\subsubsection*{User Story für Sanjivan}
+
+\textbf{Als} Medieninformatik-Student mit Interesse an Game-Design und Usability \\
+\textbf{kann ich} das Spiel nicht nur spielen, sondern auch den Code anschauen und analysieren, \\
+\textbf{sodass} ich daraus Ideen für eigene Projekte ziehen und eventuell gemeinsam mit anderen Verbesserungen umsetzen kann.
+
+
+\subsection{Use Cases}
+
+\subsection*{Use Case 1: Lara – Tetris einfach starten und spielen}
+
+\textbf{Akteur:} Lara, Schülerin \\
+\textbf{Ziel:} Schnell und unkompliziert Tetris spielen \\
+\textbf{Beschreibung:} Lara öffnet das Spiel auf ihrem Laptop, klickt auf „Easy“ im Menü und startet sofort eine Runde. Sie möchte keine Registrierung, keine Tutorials, einfach direkt loslegen. Während des Spielens sieht sie ihre Punkte und freut sich, wenn sie besser wird. Wenn sie verliert, kann sie direkt neu starten.\\
+\textbf{Voraussetzungen:} Spiel ist installiert und funktioniert ohne Internet.\\
+\textbf{Nachbedingung:} Lara kann das Spiel beliebig oft neu starten und verbessern.
+
+\subsection*{Use Case 2: Murat – Feierabend, entspannen, Highscore jagen}
+
+\textbf{Akteur:} Murat, Familienvater \\
+\textbf{Ziel:} Kurze, entspannte Runde Tetris nach der Arbeit \\
+\textbf{Beschreibung:} Nach der Spätschicht setzt sich Murat an den Familien-PC. Er klickt auf das Tetris-Spiel, wählt „Hard“, weil er sich der Herausforderung stellen will, und versucht, seinen alten Highscore zu schlagen. Die Steuerung ist leicht verständlich, es gibt keine unnötigen Texte. Wenn er verliert, bekommt er einen Game-Over-Screen mit Punktestand.\\
+\textbf{Voraussetzungen:} Das Spiel startet schnell und läuft flüssig auf älteren Geräten.\\
+\textbf{Nachbedingung:} Murat kann nach der Runde seinen Score vergleichen und neu beginnen.
+
+\subsection*{Use Case 3: Sanjivan – Code verstehen und Spiel analysieren}
+
+\textbf{Akteur:} Sanjivan, Medieninformatik-Student \\
+\textbf{Ziel:} Das Spiel sowohl spielen als auch im Quellcode nachvollziehen \\
+\textbf{Beschreibung:} Sanjivan startet das Spiel, testet es in verschiedenen Schwierigkeitsstufen und achtet dabei gezielt auf Spielverhalten, UI-Details und eventuelle Bugs. Danach schaut er sich den Code an (z.B. in PyCharm), prüft die Logik und überlegt, wie man die Struktur verbessern oder erweitern könnte – zum Beispiel mit einem Highscore-System oder Level-Up-Animationen.\\
+\textbf{Voraussetzungen:} Der Quellcode ist sauber strukturiert und kommentiert.\\
+\textbf{Nachbedingung:} Sanjivan kann eigene Verbesserungen vorschlagen oder implementieren.
+
+\newpage
+
+
+\section{Design und Implementierung}
+\subsection{UML-Diagramme}
+\begin{figure}[H]
+    \centering
+        \centering
+        \includegraphics[width=\linewidth]{UML_Diagramm.png}
+        \label{fig:tetris-menu}
+\end{figure}
+
+\subsection{Technologien (PyGame, Python)}
+
+Für das Projekt wurde hauptsächlich mit Python gearbeitet – eine Sprache, die bisschen angeschnitten wurde aus anderen Modulen und die sich gerade für Spieleprojekte super eignet, weil man schnell sichtbare Ergebnisse bekommt.\\
+Das Framework PyGame war dabei unsere erste Wahl. Es bietet viele fertige Funktionen für Dinge wie Grafiken zeichnen, Events abfragen oder Musik abspielen. Gerade für ein Spiel wie Tetris, das ständig auf Tastendrücke reagieren und visuelle Updates machen muss, hat PyGame ziemlich gut gepasst. Auch Soundeffekte und Hintergrundmusik ließen sich relativ einfach einbinden – wobei es da am Anfang auch kleinere Stolpersteine gab (z.B. das Stoppen der Musik beim Game Over war trickier als gedacht).\\
+Zu Beginn gab es bisschen Respekt vor der ganzen Strukturierung, aber durch PyGame lernt man recht schnell, wie man Klassen wie \textbf{Game}, \textbf{Grid} oder \textbf{Block} sinnvoll trennt und miteinander kommunizieren lässt. Mit jedem neuen Feature (Rotation, Punkte zählen, nächste Form anzeigen) wurde das Ganze immer klarer.\\
+Die Entwicklung war lokal auf verschiedenen Rechnern mit \textbf{pygame==2.5.2} installiert, und ein bisschen Herumprobieren mit Pfaden und Sounds hat manchmal nötig gewesen – aber insgesamt lief es ziemlich gut.
+
+
+\subsection{Wichtige Klassen und Logik}
+
+Im Zentrum des Spiels steht die Klasse \textbf{Game}. Sie hält eigentlich alles zusammen: das Spielfeld, den aktuellen Block, den nächsten Block und den Score. Von hier aus werden alle Bewegungen gesteuert  nach links, rechts, runter, rotieren und auch geprüft, ob das Spiel vorbei ist.\\
+Das \textbf{Grid} ist unser Spielfeld, bestehend aus einem 2D-Array mit 20 Zeilen und 10 Spalten. Hier wird jeder Block „eingetragen“, sobald er unten angekommen ist. Außerdem kümmert sich die Klasse darum, komplette Reihen zu erkennen und zu löschen – ein zentraler Bestandteil von Tetris.\\
+Die Blöcke selbst sind als eigene Klassen wie \texttt{IBlock}, \texttt{TBlock} oder \texttt{ZBlock} umgesetzt. Sie erben alle von einer gemeinsamen \textbf{Block Klasse}, die die Bewegung und Rotation organisiert. Die Positionen der einzelnen Teilsteine sind als \textbf{Position}-Objekte gespeichert und verändern sich, wenn man den Block bewegt oder dreht. Jede Rotation ist dabei als vordefinierte Konfiguration abgespeichert.\\
+Außerdem gibt’s eine \textbf{Colors}-Klasse, die nur für die Farben zuständig ist – einfach damit wir den Überblick behalten und alle Farben an einer Stelle definieren konnten.\\
+Für das Menü wurde eine einfache \textbf{Button}-Klasse gebaut. Die kümmert sich darum, ob man gerade mit der Maus drüber fährt oder drauf klickt. Beim Klick wird dann das Spiel gestartet oder beendet.\\
+Die Spiellogik basiert auf einem Timer, der alle paar Millisekunden ein Event feuert – dadurch fallen die Blöcke automatisch nach unten, ohne dass man irgendwas drücken muss. Und mit jeder Bewegung oder beim Drehen wird auch geprüft, ob der Block noch im Feld ist und ob er auf andere Blöcke trifft.\\
+Was anfangs ein Problem war: die Rotation so zu bauen, dass Blöcke nicht aus dem Spielfeld „rausrutschen“ oder in andere reingehen, aber das wurde dann nach einigen Tests stabil.
+
+\newpage
+
+
+
+\section{Ergebnisse}
+\subsection{Screenshots der Anwendung}
+\begin{figure} [H]
+    \centering
+    \begin{minipage}{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{Tetris-Menu.png}
+        \caption{Hauptmenü mit Schwierigkeitsauswahl}
+        \label{fig:tetris-menu}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{Tetris-Easy.png}
+        \caption{Spielbildschirm im einfachen Modus}
+        \label{fig:tetris-easy}
+    \end{minipage}
+\end{figure}
+
+\subsection{Besonderheiten / Herausforderungen}
+Die größte Herausforderung im Projekt war die Implementierung einer stabilen Kollisionserkennung insbesondere in Kombination mit der Rotation der Blöcke. Es gab mehrere Situationen, in denen ein Block direkt neben einem anderen rotiert werden sollte, was zu Problemen geführt hat. In manchen Fällen kam es dadurch sogar zum Programmabsturz, da die Rotation nicht korrekt rückgängig gemacht wurde oder die Blockposition anschließend außerhalb des Spielfelds lag.\\ Zu den Besonderheiten des Projekts zählt auf jeden Fall die Integration von Musik und einem Menü-Design. Je nach gewähltem Schwierigkeitsgrad wird ein unterschiedlicher Track abgespielt, und auch das Hintergrundbild passt sich entsprechend an. Das Menü ist mit Buttons gestaltet, die ihre Farbe beim Darüberfahren ändern das gibt dem Spiel einen kleinen modernen Touch, auch wenn es insgesamt schlicht gehalten ist.
+
+
+\subsection{Was funktioniert, was nicht (noch)?}
+Das Spiel funktioniert grundsätzlich gut: Das Menü lässt sich bedienen, das Spiel startet zuverlässig, Punkte werden gezählt, und das Highscore System funktioniert ebenfalls. Die Blöcke lassen sich wie erwartet nach links, rechts und unten bewegen sowie rotieren. Auch das Nachladen eines neuen Blocks nach dem Platzieren klappt wie geplant.\\Was noch nicht ganz zuverlässig funktioniert, ist die Rotation in engen Situationen  etwa wenn ein Block direkt neben einem anderen oder an der Wand rotiert werden soll. Dann kann es passieren, dass das Spiel abstürzt oder der Block in eine ungültige Position gerät. Die Methode \texttt{rotate()} in Kombination mit \texttt{block\_inside()} und \texttt{block\_fits()} scheint hier noch nicht alle Randfälle sauber abzudecken.\\Darüber hinaus gibt es kleinere Punkte, die noch verbessert werden könnten: Die Musiklautstärke lässt sich aktuell nicht anpassen, und auch das UI (z.B. Schriftart, Buttonplatzierung oder Farben) könnte optisch noch runder gemacht werden. Der Hardmode unterscheidet sich aktuell nur durch die Geschwindigkeit und das Hintergrundbild – hier wäre es spannend, noch zusätzliche Herausforderungen einzubauen, z.B. Block Spawns an ungewöhnlicheren Positionen.
+\newpage
+
+
+\section{Zusammenfassung und Ausblick}
+\subsection{Was haben wir erreicht?}
+Ein Tetris Game was sich Spielen lässt, manchmal noch kleine Bugs hat, aber an sich nicht groß das Spiel beeinflusst. Das Spiel hat sein eigenen Look und hebt sich bisschen hervor als die anderen Tetris Games die ich bisher gespielt habe. Ich finde das Spiel hat den Zweck von einem kleinen Lächeln für die Spieler*innen die es zum ersten mal starten gut erfüllt!
+
+\subsection{Was würden wir anders machen?}
+Den ersten beiden Sprints habe ich leider nicht wirklich ernst genommen und daraufhin kaum etwas gemacht, dass dies ein großer Fehler war und meine Planung am ende sehr schlecht war und sehr wenig funktoniert wie ich es erwartet habe wurde mir erst am späteren zeitpunkt meines Projektes klar. 
+\subsection{Ideen für Erweiterungen}
+Für mein Tetris spiel habe ich noch so paar Ideen, die das Spiel optisch und vom Spielgefühl von anderen Tetris Spielen abheben würde. Z.b mit der Katzen Thematik weiter gehen, und die Blöcke in verschiedenen Katzen formen erscheinen lassen. Die Sounds für die Rotation vielleicht mit einem "miau" hinterlgegen. So wie für andere Sounds, die vielleicht mehr Katzen thematisch gestalten. Außerderm würde ich gern bei den verschiedenen Schwierigkeiten nicht einfach die Geschwindigkeit der runterfallenden Blöcke ändern, sondern z.B auch die Position, jedes mal anders von wo Sie runter fallen, oder dass Sie manchmal einen doppelten "tick" fürs down moven bekommen. Außerdem soll das Spiel noch konstant sein.
+\newpage
+
+
+\appendix
+\section{Anhang A: Lessons Learned from the Lecture}
+\subsection{Hilfreiche Konzepte aus der Vorlesung}
+Einige Konzepte aus der Vorlesung zu objektorientierter Programmierung (\texttt{OOP}) haben mir besonders beim Aufbau meines Projekts geholfen.  Ich habe das Vererbungskonzept genutzt, um die unterschiedlichen Blockformen in Tetris effizient umzusetzen. Alle Blöcke (darunter IBlock, JBlock, OBlock etc.) leiten sich von der gemeinsamen Basisklasse Block ab. Dadurch war es möglich, allgemeine Methoden wie \texttt{move()}, \texttt{rotate()} oder \texttt{draw()} nur einmal zu definieren und sie wiederzuverwenden – analog zum Beispiel mit der Superklasse Boat und den Subklassen \texttt{MotorBoat} und \texttt{SailBoat} aus der Vorlesung.
+Auch das Prinzip „Do one thing, do it well“ erwies sich als hilfreich, etwa bei der Trennung der Klassen \texttt{Grid, Game, Button und Music}. Jede Klasse erfüllt eine eindeutig definierte Aufgabe, was auch mit dem „Single Responsibility Principle“ aus der Vorlesung übereinstimmt.
+\\Aus dem Testing Teil habe ich vor allem mitgenommen, wie wichtig es ist, beim Programmieren darauf zu achten, dass Code testbar bleibt. Auch wenn ich keine echten Unit Tests geschrieben habe, habe ich Funktionen wie \texttt{block\_fits()} oder \texttt{block\_inside()} so gestaltet, dass sie unabhängig arbeiten und leicht überprüfbar sind. Außerdem habe ich beim Debugging darauf geachtet, Randfälle (wie Kollisionen am Rand des Spielfelds oder bei der Rotation) gezielt zu testen inspiriert von „Boundary Value Analysis“ aus der Vorlesung.\\Rückblickend hat mir das Wissen aus der Vorlesung geholfen, mein Projekt strukturierter und nachvollziehbarer umzusetzen, auch wenn ich manches erst im Nachhinein richtig verstanden habe.
+
+\newpage
+
+
+\section{Anhang B: Sprint-Tagebuch}
+\subsection{Sprint 1 (08.05.–22.05.)}
+Den ersten Sprint habe ich leider ziemlich schleifen lassen. Ich hatte zwar eine grobe Idee im Kopf, aber wirklich gemacht habe ich in dieser Phase noch nichts. Rückblickend hätte ich da direkt mehr investieren sollen.
+
+\subsection{Sprint 2 (22.05.–05.06.)}
+Den ersten Sprint habe ich leider ziemlich schleifen lassen. Ich hatte zwar eine grobe Idee im Kopf, aber wirklich gemacht habe ich in dieser Phase noch nichts. Rückblickend hätte ich da direkt mehr investieren sollen.
+\subsection{Sprint 3 (05.06.–19.06.)}
+In diesem Sprint ging es ans Eingemachte: Ich habe den Hauptteil des Codes geschrieben – das Grid, die Blöcke, das Bewegen, Punkte zählen, Kollisionen erkennen usw. Das Spiel hat in dieser Phase angefangen, wirklich Form anzunehmen.
+
+\subsection{Sprint 4 (26.06.–10.07.)}
+Hier habe ich das Ganze dann aufpoliert: Ich hab ein Menü eingebaut, Musik hinzugefügt, verschiedene Schwierigkeitsstufen umgesetzt und auch am UI gearbeitet. Außerdem hab ich Fehler ausgebessert und alles ein bisschen runder gemacht.
+
+\newpage
+
+\section{Quellen und verwendete Materialien}
+
+\begin{itemize}
+    \item PyGame-Dokumentation: \url{https://www.pygame.org/docs/}
+    \item Inspiration durch mehrere YouTube Tutorials:\\ 
+    \url{https://www.youtube.com/watch?v=zfvxp7PgQ6c}\\
+    \url{https://www.youtube.com/watch?v=GMBqjxcKogA}\\
+    \url{https://www.youtube.com/watch?v=nF_crEtmpBo}\\
+    \url{https://www.youtube.com/watch?v=2iyx8_elcYg}\\
+    \item Vorlesungsfolien „Object Orientation“, „Testing“ und „Use Cases“
+    \item Stack Overflow für einzelne Problemlösungen z.B zur Rotation oder Musikverwaltung
+\end{itemize}
+
+
+\end{document}
